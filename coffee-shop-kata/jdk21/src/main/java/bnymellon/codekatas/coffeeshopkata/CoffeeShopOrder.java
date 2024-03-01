@@ -16,10 +16,10 @@
 
 package bnymellon.codekatas.coffeeshopkata;
 
+import bnymellon.codekatas.coffeeshopkata.beverage.*;
 import bnymellon.codekatas.coffeeshopkata.food.*;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class CoffeeShopOrder {
@@ -109,7 +109,13 @@ public class CoffeeShopOrder {
      * However, Tea is not part of this hierarchy.
      */
     public List<String> getDrinksForOrder() {
-        // TODO: implement method logic here
-        return Collections.emptyList();
+        List<String> drinkItems = new ArrayList<>();
+
+        drinkItems.add(((CoffeeDrink) new Americano(DrinkTemperature.HOT)).toString());
+        drinkItems.add(((CoffeeDrink) new Latte(FlavorSyrup.CARAMEL, MilkType.ALMOND_MILK, false, DrinkTemperature.HOT)).toString());
+        drinkItems.add(((CoffeeDrink) new Macchiato(MilkType.WHOLE_MILK, FlavorSyrup.VANILLA, DrinkTemperature.HOT)).toString());
+        drinkItems.add(new Tea(TeaType.MATCHA).toString());
+
+        return drinkItems;
     }
 }
