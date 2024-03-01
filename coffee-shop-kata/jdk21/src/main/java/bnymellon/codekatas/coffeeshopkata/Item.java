@@ -19,4 +19,6 @@ package bnymellon.codekatas.coffeeshopkata;
 public interface Item
 {
     double getPrice();
+
+    String itemString();
 }

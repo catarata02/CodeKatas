@@ -23,4 +23,9 @@ public record Cookie(CookieType cookieType, boolean warmed) implements BakeryIte
     {
         return 1.25;
     }
+
+    @Override
+    public String itemString() {
+        return "Cookie: " + cookieType + " $" + getPrice();
+    }
 }

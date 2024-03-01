@@ -16,9 +16,6 @@
 
 package bnymellon.codekatas.coffeeshopkata.beverage;
 
-import bnymellon.codekatas.coffeeshopkata.beverage.Beverage;
-import bnymellon.codekatas.coffeeshopkata.beverage.TeaType;
-
 public class Tea implements Beverage
 {
     private final TeaType teaType;
@@ -32,6 +29,11 @@ public class Tea implements Beverage
     public double getPrice()
     {
         return 1.50;
+    }
+
+    @Override
+    public String itemString() {
+        return "";
     }
 
     public TeaType getTeaType()

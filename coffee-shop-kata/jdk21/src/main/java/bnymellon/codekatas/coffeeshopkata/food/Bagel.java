@@ -32,5 +32,9 @@ public record Bagel(BagelType bagelType, SpreadType spreadType, boolean toasted)
     {
         return 2.50;
     }
-    
+
+    @Override
+    public String itemString() {
+        return "Bagel: " + bagelType + " $" + getPrice();
+    }
 }

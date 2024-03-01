@@ -26,6 +26,21 @@ public class CoffeeShopOrder {
     private final String customerName;
     private final List<Item> orderItems;
 
+    static class Pair {
+        String first;
+        Double second;
+
+        public Pair(String first, Double second) {
+            this.first = first;
+            this.second = second;
+        }
+
+        @Override
+        public String toString() {
+            return "First: " + first + ", Second: " + second;
+        }
+    }
+
     public CoffeeShopOrder(String customerName, List<Item> orderItems) {
         this.customerName = customerName;
         this.orderItems = orderItems;
@@ -43,30 +58,16 @@ public class CoffeeShopOrder {
      * @see <a href="https://openjdk.org/jeps/440">...</a>
      */
     public String generateReceiptForFoodItems() {
-        double total = 0.0;
-        List<String> receiptItems = new ArrayList<>();
-
-        for (Item item : this.orderItems) {
-            switch (item) {
-                case Donut(DonutType donutType) -> {
-                    receiptItems.add("Donut: " + donutType + " $" + item.getPrice());
-                    total += item.getPrice();
-                }
-                case Bagel(BagelType bagelType, SpreadType spreadType, boolean toasted) -> {
-                    receiptItems.add("Bagel: " + bagelType + " $" + item.getPrice());
-                    total += item.getPrice();
-                }
-                case Cookie(CookieType cookieType, boolean warmed) -> {
-                    receiptItems.add("Cookie: " + cookieType + " $" + item.getPrice());
-                    total += item.getPrice();
-                }
-                default -> {
-                }
-            }
-        }
-
-        receiptItems.add("Total: $" + total);
-        return String.join("\n", receiptItems);
+        Pair reduced = this.orderItems.stream()
+                .filter(it -> it instanceof BakeryItem)
+                .reduce(
+                        new Pair("", 0.0), // Identity
+                        ((pair, element) -> new Pair(pair.first + element.itemString() + "\n", pair.second + element.getPrice())), // accumulator
+                        ((pair, pair2) -> new Pair(pair.first + pair2.first, pair.second + pair.second)) // combiner
+                );
+       
+        String newResult = reduced.first + ("Total: $" + reduced.second);
+        return newResult;
     }
 
     /**
@@ -87,11 +88,10 @@ public class CoffeeShopOrder {
             switch (item) {
                 case Bagel(BagelType bagelType, SpreadType spreadType, boolean toasted) ->
                         foodItems.add(bagelType + " bagel with " + spreadType);
-                case Cookie(CookieType cookieType, boolean warmed) ->
-                        foodItems.add(cookieType + " cookie");
-                case Donut(DonutType donutType) ->
-                        foodItems.add(donutType + " donut");
-                default -> {}
+                case Cookie(CookieType cookieType, boolean warmed) -> foodItems.add(cookieType + " cookie");
+                case Donut(DonutType donutType) -> foodItems.add(donutType + " donut");
+                default -> {
+                }
             }
         }
         return foodItems;

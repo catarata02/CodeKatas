@@ -68,4 +68,9 @@ public non-sealed class Latte implements CoffeeDrink
     {
         return 3.75;
     }
+
+    @Override
+    public String itemString() {
+        return "";
+    }
 }
