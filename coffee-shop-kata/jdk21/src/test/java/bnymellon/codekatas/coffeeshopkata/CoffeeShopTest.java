@@ -33,7 +33,7 @@ import static bnymellon.codekatas.coffeeshopkata.food.DonutType.GLAZED;
 import static bnymellon.codekatas.coffeeshopkata.food.SpreadType.HERB_GARLIC_CREAM_CHEESE;
 import static org.junit.jupiter.api.Assertions.*;
 
-public class CoffeeShopTest
+class CoffeeShopTest
 {
     private List<Item> itemList;
     private CoffeeShopOrder coffeeShopOrder;
@@ -58,7 +58,7 @@ public class CoffeeShopTest
     }
 
     @Test
-    public void testBagelRecord()
+    void testBagelRecord()
     {
         Bagel bagel2 = new Bagel(EVERYTHING, HERB_GARLIC_CREAM_CHEESE, true);
         assertTrue(Bagel.class.isRecord());
@@ -66,12 +66,12 @@ public class CoffeeShopTest
         assertEquals("Bagel[bagelType=EVERYTHING, spreadType=HERB_GARLIC_CREAM_CHEESE, toasted=true]", bagel1.toString());
 
         assertTrue(bagel1.toasted());
-        assertEquals(bagel1.bagelType(), EVERYTHING);
-        assertEquals(bagel1.spreadType(), HERB_GARLIC_CREAM_CHEESE);
+        assertEquals(EVERYTHING, bagel1.bagelType());
+        assertEquals(HERB_GARLIC_CREAM_CHEESE, bagel1.spreadType());
     }
 
     @Test
-    public void generateReceiptForFoodItemsTest()
+    void generateReceiptForFoodItemsTest()
     {
         String expectedReceipt = """
                 Bagel: EVERYTHING $2.5
@@ -82,7 +82,7 @@ public class CoffeeShopTest
     }
 
     @Test
-    public void getFoodItemsForOrderTest()
+    void getFoodItemsForOrderTest()
     {
         // TODO: Complete the method getFoodItemsForOrder() in CoffeeShopOrder to make this pass
         List<String> expected = List.of("CHOCOLATE_CHIP cookie", "EVERYTHING bagel with HERB_GARLIC_CREAM_CHEESE", "GLAZED donut");
@@ -92,7 +92,7 @@ public class CoffeeShopTest
     }
 
     @Test
-    public void testSealedClasses()
+    void testSealedClasses()
     {
         // TODO: Convert Coffee Drink to sealed class
         assertTrue(CoffeeDrink.class.isSealed());
@@ -102,7 +102,7 @@ public class CoffeeShopTest
     }
 
     @Test
-    public void getDrinkItems()
+    void getDrinkItems()
     {
         // TODO: Complete the method getDrinksForOrder() in CoffeeShopOrder to make this pass
         List<String> expected = List.of("HOT Americano", "HOT CARAMEL Latte with ALMOND_MILK",
