@@ -16,23 +16,9 @@
 
 package bnymellon.codekatas.coffeeshopkata;
 
-import bnymellon.codekatas.coffeeshopkata.beverage.Americano;
-import bnymellon.codekatas.coffeeshopkata.beverage.CoffeeDrink;
-import bnymellon.codekatas.coffeeshopkata.beverage.DrinkTemperature;
-import bnymellon.codekatas.coffeeshopkata.beverage.FlavorSyrup;
-import bnymellon.codekatas.coffeeshopkata.beverage.Latte;
-import bnymellon.codekatas.coffeeshopkata.beverage.Macchiato;
-import bnymellon.codekatas.coffeeshopkata.beverage.MilkType;
-import bnymellon.codekatas.coffeeshopkata.beverage.Tea;
-import bnymellon.codekatas.coffeeshopkata.beverage.TeaType;
-import bnymellon.codekatas.coffeeshopkata.food.Bagel;
-import bnymellon.codekatas.coffeeshopkata.food.BagelType;
-import bnymellon.codekatas.coffeeshopkata.food.Cookie;
-import bnymellon.codekatas.coffeeshopkata.food.CookieType;
-import bnymellon.codekatas.coffeeshopkata.food.Donut;
-import bnymellon.codekatas.coffeeshopkata.food.DonutType;
-import bnymellon.codekatas.coffeeshopkata.food.SpreadType;
+import bnymellon.codekatas.coffeeshopkata.food.*;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -63,7 +49,29 @@ public class CoffeeShopOrder
         // TODO: Implement the receipt generation logic here.
         // Hint: look at the Java 8 implementation in the jdk8 module,
         // and the link above to see how record patterns can be utilized here
-        return "";
+        double total = 0.0;
+        List<String> receiptItems = new ArrayList<>();
+
+        for (Item item : this.orderItems){
+            if (item instanceof Donut donut) {
+                DonutType donutType = donut.donutType();
+                receiptItems.add("Donut: " + donutType + " $" + item.getPrice());
+                total += item.getPrice();
+            } else if (item instanceof Bagel bagel) {
+                BagelType bagelType = bagel.bagelType();
+                receiptItems.add("Bagel: " + bagelType + " $" + item.getPrice());
+                total += item.getPrice();
+            }
+            else if (item instanceof Cookie cookie) {
+                CookieType cookieType = cookie.cookieType();
+                receiptItems.add("Cookie: " + cookieType + " $" + item.getPrice());
+                total += item.getPrice();
+            }
+        }
+
+        receiptItems.add("Total: $" + total);
+
+        return String.join("\n", receiptItems);
     }
 
     /**
