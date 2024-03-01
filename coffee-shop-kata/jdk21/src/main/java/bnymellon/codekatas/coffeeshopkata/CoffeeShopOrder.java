@@ -82,10 +82,19 @@ public class CoffeeShopOrder {
      * @see <a href="https://openjdk.org/jeps/441">...</a>
      */
     public List<String> getFoodItemsForOrder() {
-        // TODO: implement method
-        // Hint: look at the Java 8 implementation in the jdk8 module,
-        // and the link above to see how pattern matching for switch can be utilized here
-        return Collections.emptyList();
+        List<String> foodItems = new ArrayList<>();
+        for (Item item : this.orderItems) {
+            switch (item) {
+                case Bagel(BagelType bagelType, SpreadType spreadType, boolean toasted) ->
+                        foodItems.add(bagelType + " bagel with " + spreadType);
+                case Cookie(CookieType cookieType, boolean warmed) ->
+                        foodItems.add(cookieType + " cookie");
+                case Donut(DonutType donutType) ->
+                        foodItems.add(donutType + " donut");
+                default -> {}
+            }
+        }
+        return foodItems;
     }
 
     /**
