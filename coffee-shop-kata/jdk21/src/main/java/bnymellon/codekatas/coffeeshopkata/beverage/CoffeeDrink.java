@@ -30,8 +30,7 @@ package bnymellon.codekatas.coffeeshopkata.beverage;
  * @see <a href="https://openjdk.org/jeps/395">...</a>
  */
 
-// TODO: Convert to Sealed interface
-public interface CoffeeDrink extends Beverage
-{
+public sealed interface CoffeeDrink extends Beverage 
+        permits Americano, Latte, Macchiato {
     int espressoShot();
 }

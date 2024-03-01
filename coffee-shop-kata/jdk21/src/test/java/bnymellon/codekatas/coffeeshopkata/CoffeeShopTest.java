@@ -93,7 +93,6 @@ class CoffeeShopTest
     @Test
     void testSealedClasses()
     {
-        // TODO: Convert Coffee Drink to sealed class
         assertTrue(CoffeeDrink.class.isSealed());
         assertFalse(Americano.class.isSealed());
         assertFalse(Macchiato.class.isSealed());

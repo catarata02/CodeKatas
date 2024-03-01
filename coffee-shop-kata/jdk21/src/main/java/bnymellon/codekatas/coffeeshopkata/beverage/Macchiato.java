@@ -16,7 +16,7 @@
 
 package bnymellon.codekatas.coffeeshopkata.beverage;
 
-public class Macchiato implements CoffeeDrink
+public non-sealed class Macchiato implements CoffeeDrink
 {
     private final MilkType milkType;
     private final FlavorSyrup flavorSyrup;
