@@ -16,11 +16,7 @@
 
 package bnymellon.codekatas.coffeeshopkata;
 
-import bnymellon.codekatas.coffeeshopkata.beverage.Americano;
-import bnymellon.codekatas.coffeeshopkata.beverage.CoffeeDrink;
-import bnymellon.codekatas.coffeeshopkata.beverage.DrinkTemperature;
-import bnymellon.codekatas.coffeeshopkata.beverage.Latte;
-import bnymellon.codekatas.coffeeshopkata.beverage.Macchiato;
+import bnymellon.codekatas.coffeeshopkata.beverage.*;
 import bnymellon.codekatas.coffeeshopkata.food.Bagel;
 import bnymellon.codekatas.coffeeshopkata.food.Cookie;
 import bnymellon.codekatas.coffeeshopkata.food.Donut;
@@ -35,9 +31,7 @@ import static bnymellon.codekatas.coffeeshopkata.food.BagelType.EVERYTHING;
 import static bnymellon.codekatas.coffeeshopkata.food.CookieType.CHOCOLATE_CHIP;
 import static bnymellon.codekatas.coffeeshopkata.food.DonutType.GLAZED;
 import static bnymellon.codekatas.coffeeshopkata.food.SpreadType.HERB_GARLIC_CREAM_CHEESE;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class CoffeeShopTest
 {
@@ -79,7 +73,6 @@ public class CoffeeShopTest
     @Test
     public void generateReceiptForFoodItemsTest()
     {
-        // TODO: Complete the method generateReceipt() in CoffeeShopOrder to make this pass
         String expectedReceipt = """
                 Bagel: EVERYTHING $2.5
                 Cookie: CHOCOLATE_CHIP $1.25

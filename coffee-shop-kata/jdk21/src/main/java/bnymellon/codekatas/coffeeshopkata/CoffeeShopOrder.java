@@ -22,13 +22,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class CoffeeShopOrder
-{
+public class CoffeeShopOrder {
     private final String customerName;
     private final List<Item> orderItems;
 
-    public CoffeeShopOrder(String customerName, List<Item> orderItems)
-    {
+    public CoffeeShopOrder(String customerName, List<Item> orderItems) {
         this.customerName = customerName;
         this.orderItems = orderItems;
     }
@@ -44,33 +42,30 @@ public class CoffeeShopOrder
      *
      * @see <a href="https://openjdk.org/jeps/440">...</a>
      */
-    public String generateReceiptForFoodItems()
-    {
-        // TODO: Implement the receipt generation logic here.
-        // Hint: look at the Java 8 implementation in the jdk8 module,
-        // and the link above to see how record patterns can be utilized here
+    public String generateReceiptForFoodItems() {
         double total = 0.0;
         List<String> receiptItems = new ArrayList<>();
 
-        for (Item item : this.orderItems){
-            if (item instanceof Donut donut) {
-                DonutType donutType = donut.donutType();
-                receiptItems.add("Donut: " + donutType + " $" + item.getPrice());
-                total += item.getPrice();
-            } else if (item instanceof Bagel bagel) {
-                BagelType bagelType = bagel.bagelType();
-                receiptItems.add("Bagel: " + bagelType + " $" + item.getPrice());
-                total += item.getPrice();
-            }
-            else if (item instanceof Cookie cookie) {
-                CookieType cookieType = cookie.cookieType();
-                receiptItems.add("Cookie: " + cookieType + " $" + item.getPrice());
-                total += item.getPrice();
+        for (Item item : this.orderItems) {
+            switch (item) {
+                case Donut(DonutType donutType) -> {
+                    receiptItems.add("Donut: " + donutType + " $" + item.getPrice());
+                    total += item.getPrice();
+                }
+                case Bagel(BagelType bagelType, SpreadType spreadType, boolean toasted) -> {
+                    receiptItems.add("Bagel: " + bagelType + " $" + item.getPrice());
+                    total += item.getPrice();
+                }
+                case Cookie(CookieType cookieType, boolean warmed) -> {
+                    receiptItems.add("Cookie: " + cookieType + " $" + item.getPrice());
+                    total += item.getPrice();
+                }
+                default -> {
+                }
             }
         }
 
         receiptItems.add("Total: $" + total);
-
         return String.join("\n", receiptItems);
     }
 
@@ -86,8 +81,7 @@ public class CoffeeShopOrder
      *
      * @see <a href="https://openjdk.org/jeps/441">...</a>
      */
-    public List<String> getFoodItemsForOrder()
-    {
+    public List<String> getFoodItemsForOrder() {
         // TODO: implement method
         // Hint: look at the Java 8 implementation in the jdk8 module,
         // and the link above to see how pattern matching for switch can be utilized here
@@ -105,8 +99,7 @@ public class CoffeeShopOrder
      * (e.g., Americano, Latte, Macchiato) are allowed within a hierarchy.
      * However, Tea is not part of this hierarchy.
      */
-    public List<String> getDrinksForOrder()
-    {
+    public List<String> getDrinksForOrder() {
         // TODO: implement method logic here
         return Collections.emptyList();
     }
