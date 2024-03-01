@@ -20,5 +20,5 @@ public interface Item
 {
     double getPrice();
 
-    String itemString();
+    String itemDescription();
 }

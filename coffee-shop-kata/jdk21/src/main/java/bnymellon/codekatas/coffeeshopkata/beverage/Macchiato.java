@@ -63,7 +63,7 @@ public non-sealed class Macchiato implements CoffeeDrink
     }
 
     @Override
-    public String itemString() {
+    public String itemDescription() {
         return null;
     }
 }

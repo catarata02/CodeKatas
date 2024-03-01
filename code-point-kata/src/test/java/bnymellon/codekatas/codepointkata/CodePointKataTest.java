@@ -20,15 +20,22 @@ import org.eclipse.collections.api.bag.primitive.CharBag;
 import org.eclipse.collections.api.bag.primitive.MutableCharBag;
 import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.impl.factory.primitive.CharBags;
+import org.eclipse.collections.impl.string.immutable.CodePointList;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import java.net.URL;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class CodePointKataTest
 {
     @Test
     public void translateTheSecretMessage() throws Exception
     {
-        var url = this.getClass().getClassLoader().getResource("codepoints.txt");
+        URL url = this.getClass().getClassLoader().getResource("codepoints.txt");
+        Path path = Paths.get(url.toURI());
+
         // Hint: Look at Paths.get(URI)
         // Hint: Look at Files.lines(Path) which returns a Stream<String>
 
@@ -102,7 +109,6 @@ public class CodePointKataTest
 
     private String convertCodePointsToString(int... codePoints)
     {
-        // Hint: Look at new String(int[], int, int) or CodePointList.from(int...)
-        return "";
+        return CodePointList.from(codePoints).toString();
     }
 }

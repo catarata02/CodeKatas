@@ -70,7 +70,7 @@ public non-sealed class Latte implements CoffeeDrink
     }
 
     @Override
-    public String itemString() {
+    public String itemDescription() {
         return "";
     }
 }

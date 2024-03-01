@@ -32,7 +32,7 @@ public class Tea implements Beverage
     }
 
     @Override
-    public String itemString() {
+    public String itemDescription() {
         return "";
     }
 

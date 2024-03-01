@@ -34,7 +34,7 @@ public record Bagel(BagelType bagelType, SpreadType spreadType, boolean toasted)
     }
 
     @Override
-    public String itemString() {
+    public String itemDescription() {
         return "Bagel: " + bagelType + " $" + getPrice();
     }
 }

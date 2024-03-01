@@ -37,7 +37,7 @@ public non-sealed class Americano implements CoffeeDrink
     }
 
     @Override
-    public String itemString() {
+    public String itemDescription() {
         return "";
     }
 

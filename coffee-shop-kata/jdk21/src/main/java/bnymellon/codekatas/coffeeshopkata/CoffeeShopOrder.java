@@ -27,17 +27,17 @@ public class CoffeeShopOrder {
     private final List<Item> orderItems;
 
     static class Pair {
-        String first;
-        Double second;
+        String description;
+        Double price;
 
-        public Pair(String first, Double second) {
-            this.first = first;
-            this.second = second;
+        public Pair(String description, Double price) {
+            this.description = description;
+            this.price = price;
         }
 
         @Override
         public String toString() {
-            return "First: " + first + ", Second: " + second;
+            return "First: " + description + ", Second: " + price;
         }
     }
 
@@ -62,26 +62,26 @@ public class CoffeeShopOrder {
                 .filter(it -> it instanceof BakeryItem)
                 .reduce(
                         new Pair("", 0.0), // Identity
-                        ((pair, element) -> new Pair(pair.first + element.itemString() + "\n", pair.second + element.getPrice())), // accumulator
-                        ((pair, pair2) -> new Pair(pair.first + pair2.first, pair.second + pair.second)) // combiner
+                        ((pair, element) -> new Pair(pair.description + element.itemDescription() + "\n", pair.price + element.getPrice())), // accumulator
+                        ((pair, pair2) -> new Pair(pair.description + pair2.description, pair.price + pair.price)) // combiner
                 );
        
-        String newResult = reduced.first + ("Total: $" + reduced.second);
+        String newResult = reduced.description + ("Total: $" + reduced.price);
         return newResult;
     }
 
-    /**
-     * Return a list of custom strings for the customer's food items!
-     * The string format for each food item is as follows:
-     * If the item is a Bagel: "[bagelType] with [spreadType]"
-     * If the item is a Cookie: "[cookieType] cookie"
-     * If the item is a Donut: "[donutType] donut"
-     * Otherwise: it is a beverage and should not be added to the list!
-     * <p>
-     * NOTE: This method show-cases a switch-case pattern matching.
-     *
-     * @see <a href="https://openjdk.org/jeps/441">...</a>
-     */
+        /**
+         * Return a list of custom strings for the customer's food items!
+         * The string format for each food item is as follows:
+         * If the item is a Bagel: "[bagelType] with [spreadType]"
+         * If the item is a Cookie: "[cookieType] cookie"
+         * If the item is a Donut: "[donutType] donut"
+         * Otherwise: it is a beverage and should not be added to the list!
+         * <p>
+         * NOTE: This method show-cases a switch-case pattern matching.
+         *
+         * @see <a href="https://openjdk.org/jeps/441">...</a>
+         */
     public List<String> getFoodItemsForOrder() {
         List<String> foodItems = new ArrayList<>();
         for (Item item : this.orderItems) {
